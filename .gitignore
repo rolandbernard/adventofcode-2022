@@ -1,0 +1,26 @@
+
+tmp/
+tmp.*
+.vscode
+.vim*
+input*.txt
+
+# Language specific
+compile_flags.txt
+.Rhistory
+package*.json
+node_modules/
+tsconfig.json
+
+# Compiled files
+*.out
+*.o
+*.hi
+*.class
+*.tasty
+*.exe
+*.cmi
+*.cmo
+*.wasm
+obj_dir
+
