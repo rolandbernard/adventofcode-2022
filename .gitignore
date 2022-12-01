@@ -11,8 +11,11 @@ compile_flags.txt
 package*.json
 node_modules/
 tsconfig.json
+rust-project.json
 
 # Compiled files
+part1
+part2
 *.out
 *.o
 *.hi
