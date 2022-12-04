@@ -4,6 +4,7 @@ tmp.*
 .vscode
 .vim*
 input*.txt
+Cargo.*
 
 # Language specific
 compile_flags.txt
@@ -27,3 +28,8 @@ part2
 *.wasm
 obj_dir
 
+
+
+# Added by cargo
+
+/target
