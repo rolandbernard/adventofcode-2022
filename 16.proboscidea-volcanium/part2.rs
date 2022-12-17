@@ -61,7 +61,6 @@ fn find_max(
                         next_flow -= flows[m];
                     }
                 }
-                // higher than 2585
                 if next_pos != pos {
                     let this = find_max(
                         flows,
