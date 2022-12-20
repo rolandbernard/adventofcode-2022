@@ -12,31 +12,37 @@ fn max_geodes(blue: &[[i64; 4]], rob: [i64; 4], res: [i64; 4], time: i64, bound:
         <= bound
     {
         return bound;
-    } else if time == 0 {
-        return res[3];
     } else {
-        let mut max = bound;
+        let mut max = bound.max(res[3] + rob[3] * time);
         for i in (0..4).rev() {
-            if blue[i][0] <= res[0]
-                && blue[i][1] <= res[1]
-                && blue[i][2] <= res[2]
-                && blue[i][3] <= res[3]
-            {
+            if i == 3 || res[i] + time * rob[i] < time * blue.iter().map(|x| x[i]).max().unwrap() {
+                let mut skip = 0;
+                for j in 0..4 {
+                    if blue[i][j] != 0 {
+                        if rob[j] == 0 {
+                            skip = time;
+                        } else {
+                            let this = ((blue[i][j] - res[j]).max(0) + rob[j] - 1) / rob[j];
+                            if this > skip {
+                                skip = this;
+                            }
+                        }
+                    }
+                }
+                if skip >= time {
+                    continue;
+                }
                 let mut new_res = res;
                 for j in 0..4 {
+                    new_res[j] += rob[j] * (skip + 1);
                     new_res[j] -= blue[i][j];
-                    new_res[j] += rob[j];
                 }
                 let mut new_rob = rob;
                 new_rob[i] += 1;
-                max = max_geodes(blue, new_rob, new_res, time - 1, max);
+                max = max_geodes(blue, new_rob, new_res, time - 1 - skip, max);
             }
         }
-        let mut new_res = res;
-        for j in 0..4 {
-            new_res[j] += rob[j];
-        }
-        return max_geodes(blue, rob, new_res, time - 1, max);
+        return max;
     }
 }
 
